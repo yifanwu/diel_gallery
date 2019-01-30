@@ -30,4 +30,13 @@ export default class Diel {
       loadPage();
     }, 200);
   }
+  inspectQueryResult(query: string) {
+    let r = this.db.exec(query)[0];
+    if (r) {
+      console.log(r.columns.join("\t"));
+      console.log(JSON.stringify(r.values).replace(/\],\[/g, "\n").replace("[[", "").replace("]]", "").replace(/,/g, "\t"));
+    } else {
+      console.log("No results");
+    }
+  }
 }
