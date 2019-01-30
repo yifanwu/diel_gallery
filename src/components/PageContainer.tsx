@@ -1,39 +1,16 @@
 import * as React from "react";
-import { diel } from "../diel/setup";
+import ReactCounter from "./ReactCounter";
+import BasicDBCounter from "./BasicDBCounter";
 
-interface CounterProp {
-  color: string;
-}
-interface CounterState {
-  count: number;
-}
-
-
-export default class Counter extends React.Component<CounterProp, CounterState> {
-  constructor(props: CounterProp) {
-    console.log(diel);
-    super(props);
-    // this.add = this.add.bind(this);
-    this.state = {
-      count: 0
-    };
-  }
-  evalDielView() {
-    // this.setState(prevState => ({
-    //   count: prevState.count + 1
-    // }));
-    diel.views.count.bind({});
-    diel.views.count.step();
-    const count = diel.views.count.getAsObject().count as number;
-    this.setState({count});
-  }
-  render() {
-    return <>
-      <p style={{color: this.props.color}}>{this.state.count}</p>
-      <button onClick={() => {
-        diel.interactions.add.run({});
-        this.evalDielView();
-      }}>add</button>
-    </>;
-  }
-}
+export const PageContainer: React.StatelessComponent<{}> = () => {
+  return <>
+  <p>This is a counter implemented in React</p>
+  <ReactCounter
+    color={"red"}
+  />
+  <p>Below is the same counter implemented using databases</p>
+  <BasicDBCounter
+    color={"green"}
+  />
+  </>;
+};

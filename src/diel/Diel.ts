@@ -14,11 +14,11 @@ export default class Diel {
     this.setup();
   }
   setup() {
-    console.log("loading");
-    this.db = new Database();
+    this.db = new Database(); // sql.js
     let db = this.db;
-    db.exec(`create table interactions(step integer primary key, value integer)`);
+    this.db.exec(`create table interactions(step integer primary key, value integer)`);
     this.interactions = {
+      // TODO: get rid of the prepared statement and use raw query
       add: db.prepare(`insert into interactions (value) values (1)`),
       sub: db.prepare(`insert into interactions (value) values (-1)`),
     };
