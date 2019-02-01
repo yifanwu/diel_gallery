@@ -17,6 +17,14 @@ export default class Diel {
     this.db = new Database(); // sql.js
     let db = this.db;
     this.db.exec(`create table interactions(step integer primary key, value integer)`);
+    // set it up for barchart
+    this.db.exec(`
+      create table attendee (animal text);
+      insert into attendee values
+        ('cat'), ('cat'),('cat'),
+        ('dog'), ('dog'),('dog'),('dog'), ('dog'),('dog')
+        ;
+    `);
     this.interactions = {
       // TODO: get rid of the prepared statement and use raw query
       add: db.prepare(`insert into interactions (value) values (1)`),
